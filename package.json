@@ -1,0 +1,26 @@
+{
+  "name": "sancha-3am",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://g0tt@github.com/g0tt/sancha-3am.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g0tt/sancha-3am/issues"
+  },
+  "homepage": "https://github.com/g0tt/sancha-3am#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "oauth": "^0.9.15"
+  }
+}
