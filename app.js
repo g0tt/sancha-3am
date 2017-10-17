@@ -1,6 +1,8 @@
 var config = require('./config.json');
 
 var express = require('express');
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/sancha-3am');
 
 var OAuth = require('oauth').OAuth
 	, oauth = new OAuth(
@@ -12,6 +14,15 @@ var OAuth = require('oauth').OAuth
 	"http://localhost:4000/auth/twitter/callback",
 	"HMAC-SHA1"
 );
+
+var User = new mongoose.Schema({
+	screen_name: { type: String },
+	access_token: { type: String },
+	access_token_secret: { type: String },
+	created: { type: Date, default: Date.now }
+});
+
+var User = db.model('User', User);
 
 var app = express();
 
@@ -57,20 +68,25 @@ app.get('/auth/twitter/callback', function(req, res, next) {
 			function(error, oauth_access_token, oauth_access_token_secret, results) {
 				if (error) {
 					console.log(error);
-					res.send("Authentication Failure!");
+					res.send("Failed");
 				}
 				else {
 					req.session.oauth.access_token = oauth_access_token;
 					req.session.oauth.access_token_secret = oauth_access_token_secret;
 					console.log(results, req.session.oauth);
-					res.send("Authentication Successful");
-					// res.redirect('/'); // You might actually want to redirect!
+					User.find({ screen_name: results.screen_name }).remove().exec();
+					User.create({
+						screen_name: results.screen_name,
+						access_token: oauth_access_token,
+						access_token_secret: oauth_access_token_secret
+					});
+					res.send("Success!(" + results.screen_name + ")");
 				}
 			}
 		);
 	}
 	else {
-		res.send("Authentication Failed.");
+		res.send("Failed");
 	}
 
 });

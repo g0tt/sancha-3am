@@ -21,6 +21,8 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "mongodb": "^2.2.33",
+    "mongoose": "^4.12.3",
     "oauth": "^0.9.15"
   }
 }

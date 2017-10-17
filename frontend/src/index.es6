@@ -5,7 +5,7 @@ import './common.es6';
 
 class TwitterAuthButton extends React.Component {
 	auth() {
-		window.location = "/auth/twitter"
+		window.location = "./auth/twitter"
 	}
 
 	render() {
