@@ -1,4 +1,5 @@
 var config = require('./config.json');
+var os = require('os');
 
 var express = require('express');
 var mongoose = require('mongoose');
@@ -11,7 +12,7 @@ var OAuth = require('oauth').OAuth
 	config.twitter.consumer_key,
 	config.twitter.consumer_secret,
 	"1.0",
-	"http://localhost:4000/auth/twitter/callback",
+	"http://" + config.hostname + "/auth/twitter/callback",
 	"HMAC-SHA1"
 );
 
